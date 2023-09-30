@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+<Match>
+  <Class name="beesweeper.model.shape.RandomCoordinateGenerator" />
+  <Bug pattern="DMI_RANDOM_USED_ONLY_ONCE" />
+</Match>
+</FindBugsFilter>

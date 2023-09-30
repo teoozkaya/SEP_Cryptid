@@ -1,0 +1,77 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+
+    // Quality stuff
+    id 'checkstyle'
+    id "com.github.spotbugs" version "5.0.14"
+    id "com.diffplug.spotless" version "6.19.0"
+}
+
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation project(path: ':jsonBuilder')
+    testImplementation 'junit:junit:4.13.2'
+    implementation(project(":model"))
+    implementation 'com.google.code.gson:gson:2.10.1'
+}
+
+checkstyle {
+    toolVersion '10.12.0'
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+    excludeFilter = file('../config/spotbugs/exclude.xml')
+}
+
+spotbugs {
+    effort = 'max'
+}
+
+spotless {
+    java {
+        googleJavaFormat()
+        lineEndings 'GIT_ATTRIBUTES'
+    }
+}
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'de.lmu.ifi.cip.server.Server'
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+tasks.register('customFatJar', Jar) {
+    manifest {
+        attributes 'Main-Class': 'de.lmu.ifi.cip.server.Server'
+    }
+    archiveBaseName = "cryptid"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    //Inkludiert alles was im Classpath liegt, der zur Ausführung genutzt wird
+    with jar
+}
+
+
+

@@ -1,0 +1,44 @@
+{
+	"type": "login"
+	"nickname": "Max Mustermann"
+}
+
+{
+	"type": "mapInfo"
+	"MapLayout": "1,2,3,4,5,6"
+	"playerNumber": "3"
+	"hint": "Text"
+}
+
+{
+	"type": "durchsuchenAktion"
+	"Feldkoordinate": "1,2"
+	"Spieler": "1"
+}
+
+{
+	"type": " Spielerwechsel"
+	"aktiver Spieler": "Spieler2"
+}
+{
+	"type": "placeItem"
+	"item": "disc"
+	"feld": "1,2"
+	"Spieler": " Spieler1"
+}
+{	
+	"type": "fragenAktion"
+	"Feld": "1,3"
+	"Spieleraktiv": "Spieler1"
+	"Spielerbefragt": "Spieler2"
+}	
+{
+	"type": " Spielerwechsel"
+	"aktiver Spieler": "Spieler2"
+}
+{
+	"type": "placeItem"
+	"item": "disc"
+	"feld": "1,2"
+	"Spieler": " Spieler1"
+}	
